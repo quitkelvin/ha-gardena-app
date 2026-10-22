@@ -137,4 +137,5 @@ class GardenaCoordinator(DataUpdateCoordinator[dict[str, GardenaDevice]]):
             from homeassistant.exceptions import HomeAssistantError
 
             raise HomeAssistantError(str(err)) from err
-        await self.async_request_refresh()
+        # immediate re-read (request_refresh is debounced and showed stale schedules)
+        await self.async_refresh()
