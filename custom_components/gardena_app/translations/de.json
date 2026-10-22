@@ -1,0 +1,164 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "GARDENA App-Zugang",
+        "description": "Schlüssel und Secret der Husqvarna-Entwickler-App (dieselben wie bei der offiziellen GARDENA-Integration).",
+        "data": {
+          "client_id": "Application Key",
+          "client_secret": "Application Secret"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Schlüssel oder Secret abgelehnt",
+      "cannot_connect": "GARDENA-Cloud nicht erreichbar"
+    },
+    "abort": {
+      "already_configured": "Dieser Garten ist schon eingerichtet"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "scan_minutes": "Abfrage alle … Minuten"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "connection": {
+        "name": "Verbindung"
+      },
+      "last_online": {
+        "name": "Zuletzt online"
+      },
+      "firmware_status": {
+        "name": "Firmware"
+      },
+      "radio_quality": {
+        "name": "Funkqualität"
+      },
+      "ip_address": {
+        "name": "IP-Adresse"
+      },
+      "wlan_ssid": {
+        "name": "WLAN"
+      },
+      "wifi_status": {
+        "name": "WLAN-Signal"
+      },
+      "soil_humidity": {
+        "name": "Bodenfeuchte"
+      },
+      "soil_temperature": {
+        "name": "Bodentemperatur"
+      },
+      "ambient_temperature": {
+        "name": "Lufttemperatur"
+      },
+      "light": {
+        "name": "Helligkeit"
+      },
+      "battery": {
+        "name": "Batterie"
+      },
+      "next_start": {
+        "name": "Nächster Start"
+      }
+    },
+    "binary_sensor": {
+      "online": {
+        "name": "Online"
+      }
+    },
+    "switch": {
+      "winter_pause": {
+        "name": "Winterpause (alle Zeitpläne)"
+      },
+      "power": {
+        "name": "Steckdose"
+      }
+    },
+    "button": {
+      "close_all": {
+        "name": "Alle Ventile schließen"
+      },
+      "measure": {
+        "name": "Jetzt messen"
+      }
+    }
+  },
+  "services": {
+    "pause_schedule": {
+      "name": "Zeitplan pausieren",
+      "description": "Ohne Angabe: bis auf Weiteres (wie in der App).",
+      "fields": {
+        "until": {
+          "name": "Bis",
+          "description": ""
+        },
+        "hours": {
+          "name": "Stunden",
+          "description": ""
+        }
+      }
+    },
+    "resume_schedule": {
+      "name": "Zeitplan fortsetzen",
+      "description": ""
+    },
+    "add_schedule": {
+      "name": "Zeitplan anlegen",
+      "description": "",
+      "fields": {
+        "start": {
+          "name": "Start",
+          "description": "HH:MM"
+        },
+        "end": {
+          "name": "Ende",
+          "description": "HH:MM"
+        },
+        "weekdays": {
+          "name": "Wochentage",
+          "description": ""
+        }
+      }
+    },
+    "update_schedule": {
+      "name": "Zeitplan ändern",
+      "description": "",
+      "fields": {
+        "event_id": {
+          "name": "ID",
+          "description": ""
+        },
+        "start": {
+          "name": "Start",
+          "description": "HH:MM"
+        },
+        "end": {
+          "name": "Ende",
+          "description": "HH:MM"
+        },
+        "weekdays": {
+          "name": "Wochentage",
+          "description": ""
+        }
+      }
+    },
+    "delete_schedule": {
+      "name": "Zeitplan löschen",
+      "description": "",
+      "fields": {
+        "event_id": {
+          "name": "ID",
+          "description": ""
+        }
+      }
+    }
+  }
+}

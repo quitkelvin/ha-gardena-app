@@ -1,0 +1,18 @@
+{
+  "domain": "gardena_app",
+  "name": "Gardena App (schedules & control)",
+  "codeowners": [
+    "@quitkelvin"
+  ],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/quitkelvin/ha-gardena-app",
+  "integration_type": "hub",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/quitkelvin/ha-gardena-app/issues",
+  "loggers": [
+    "custom_components.gardena_app"
+  ],
+  "requirements": [],
+  "version": "0.1.0"
+}

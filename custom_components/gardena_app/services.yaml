@@ -1,0 +1,72 @@
+pause_schedule:
+  target:
+    entity:
+      integration: gardena_app
+      domain: switch
+  fields:
+    until:
+      selector:
+        datetime:
+    hours:
+      selector:
+        number:
+          min: 1
+          max: 8760
+          unit_of_measurement: h
+resume_schedule:
+  target:
+    entity:
+      integration: gardena_app
+      domain: switch
+add_schedule:
+  target:
+    entity:
+      integration: gardena_app
+      domain: switch
+  fields:
+    start:
+      required: true
+      example: "06:00"
+      selector:
+        text:
+    end:
+      required: true
+      example: "06:15"
+      selector:
+        text:
+    weekdays:
+      selector:
+        select:
+          multiple: true
+          options: [monday, tuesday, wednesday, thursday, friday, saturday, sunday]
+update_schedule:
+  target:
+    entity:
+      integration: gardena_app
+      domain: switch
+  fields:
+    event_id:
+      required: true
+      selector:
+        text:
+    start:
+      selector:
+        text:
+    end:
+      selector:
+        text:
+    weekdays:
+      selector:
+        select:
+          multiple: true
+          options: [monday, tuesday, wednesday, thursday, friday, saturday, sunday]
+delete_schedule:
+  target:
+    entity:
+      integration: gardena_app
+      domain: switch
+  fields:
+    event_id:
+      required: true
+      selector:
+        text:

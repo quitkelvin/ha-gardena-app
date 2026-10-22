@@ -1,0 +1,164 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "GARDENA app access",
+        "description": "Key and secret of your Husqvarna developer application (same as the official GARDENA integration).",
+        "data": {
+          "client_id": "Application key",
+          "client_secret": "Application secret"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Key or secret rejected",
+      "cannot_connect": "GARDENA cloud unreachable"
+    },
+    "abort": {
+      "already_configured": "Location already configured"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "scan_minutes": "Poll every … minutes"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "connection": {
+        "name": "Connection"
+      },
+      "last_online": {
+        "name": "Last online"
+      },
+      "firmware_status": {
+        "name": "Firmware"
+      },
+      "radio_quality": {
+        "name": "Radio quality"
+      },
+      "ip_address": {
+        "name": "IP address"
+      },
+      "wlan_ssid": {
+        "name": "WLAN"
+      },
+      "wifi_status": {
+        "name": "WLAN signal"
+      },
+      "soil_humidity": {
+        "name": "Soil moisture"
+      },
+      "soil_temperature": {
+        "name": "Soil temperature"
+      },
+      "ambient_temperature": {
+        "name": "Ambient temperature"
+      },
+      "light": {
+        "name": "Light"
+      },
+      "battery": {
+        "name": "Battery"
+      },
+      "next_start": {
+        "name": "Next start"
+      }
+    },
+    "binary_sensor": {
+      "online": {
+        "name": "Online"
+      }
+    },
+    "switch": {
+      "winter_pause": {
+        "name": "Winter pause (all schedules)"
+      },
+      "power": {
+        "name": "Power socket"
+      }
+    },
+    "button": {
+      "close_all": {
+        "name": "Close all valves"
+      },
+      "measure": {
+        "name": "Measure now"
+      }
+    }
+  },
+  "services": {
+    "pause_schedule": {
+      "name": "Pause schedule",
+      "description": "Without values: until further notice (like the app).",
+      "fields": {
+        "until": {
+          "name": "Until",
+          "description": ""
+        },
+        "hours": {
+          "name": "Hours",
+          "description": ""
+        }
+      }
+    },
+    "resume_schedule": {
+      "name": "Resume schedule",
+      "description": ""
+    },
+    "add_schedule": {
+      "name": "Add schedule",
+      "description": "",
+      "fields": {
+        "start": {
+          "name": "Start",
+          "description": "HH:MM"
+        },
+        "end": {
+          "name": "End",
+          "description": "HH:MM"
+        },
+        "weekdays": {
+          "name": "Weekdays",
+          "description": ""
+        }
+      }
+    },
+    "update_schedule": {
+      "name": "Update schedule",
+      "description": "",
+      "fields": {
+        "event_id": {
+          "name": "ID",
+          "description": ""
+        },
+        "start": {
+          "name": "Start",
+          "description": "HH:MM"
+        },
+        "end": {
+          "name": "End",
+          "description": "HH:MM"
+        },
+        "weekdays": {
+          "name": "Weekdays",
+          "description": ""
+        }
+      }
+    },
+    "delete_schedule": {
+      "name": "Delete schedule",
+      "description": "",
+      "fields": {
+        "event_id": {
+          "name": "ID",
+          "description": ""
+        }
+      }
+    }
+  }
+}
