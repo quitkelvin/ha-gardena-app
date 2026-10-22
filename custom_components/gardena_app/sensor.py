@@ -121,10 +121,7 @@ class GardenaNextStartSensor(GardenaEntity, SensorEntity):
     _attr_device_class = SensorDeviceClass.TIMESTAMP
 
     def __init__(self, coordinator, device_id: str, valve_id: int | None) -> None:
-        super().__init__(coordinator, device_id, "next_start", valve_id)
-        if valve_id is not None:
-            self._attr_translation_key = None
-            self._attr_name = f"{self.valve_name} nächster Start"
+        super().__init__(coordinator, device_id, "next_start" if valve_id is None else "valve_next_start", valve_id)
 
     @property
     def native_value(self):
@@ -155,8 +152,6 @@ class GardenaPausedUntilSensor(GardenaEntity, SensorEntity):
 
     def __init__(self, coordinator, device_id: str, valve_id: int) -> None:
         super().__init__(coordinator, device_id, "paused_until", valve_id)
-        self._attr_translation_key = None
-        self._attr_name = f"{self.valve_name} pausiert bis"
 
     @property
     def native_value(self):
@@ -168,12 +163,10 @@ class GardenaValveErrorSensor(GardenaEntity, SensorEntity):
 
     def __init__(self, coordinator, device_id: str, valve_id: int) -> None:
         super().__init__(coordinator, device_id, "valve_error", valve_id)
-        self._attr_translation_key = None
-        self._attr_name = f"{self.valve_name} Fehler"
 
     @property
     def native_value(self):
         v = self.device.prop("error", f"valve_error_{self._valve_id}")
         if isinstance(v, dict):
             v = v.get("value") or v.get("error")
-        return v or "kein Fehler"
+        return v or "no_message"

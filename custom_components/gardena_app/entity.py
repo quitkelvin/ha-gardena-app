@@ -22,6 +22,8 @@ class GardenaEntity(CoordinatorEntity[GardenaCoordinator]):
         suffix = f"_{valve_id}" if valve_id is not None else ""
         self._attr_unique_id = f"{device_id}{suffix}_{key}"
         self._attr_translation_key = key
+        if valve_id is not None:
+            self._attr_translation_placeholders = {"valve": dev.valve_name(valve_id)}
         self._attr_device_info = DeviceInfo(
             identifiers={(DOMAIN, device_id)},
             name=f"{dev.name} (App)",

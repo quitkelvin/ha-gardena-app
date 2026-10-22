@@ -67,6 +67,18 @@
       },
       "next_start": {
         "name": "Next start"
+      },
+      "valve_next_start": {
+        "name": "{valve} next start"
+      },
+      "paused_until": {
+        "name": "{valve} paused until"
+      },
+      "valve_error": {
+        "name": "{valve} error",
+        "state": {
+          "no_message": "no error"
+        }
       }
     },
     "binary_sensor": {
@@ -80,6 +92,9 @@
       },
       "power": {
         "name": "Power socket"
+      },
+      "schedule": {
+        "name": "{valve} schedule"
       }
     },
     "button": {
@@ -88,6 +103,16 @@
       },
       "measure": {
         "name": "Measure now"
+      }
+    },
+    "number": {
+      "duration": {
+        "name": "{valve} manual duration"
+      }
+    },
+    "valve": {
+      "valve": {
+        "name": "{valve}"
       }
     }
   },

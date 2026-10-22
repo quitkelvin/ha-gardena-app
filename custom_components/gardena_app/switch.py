@@ -71,8 +71,6 @@ class GardenaScheduleSwitch(GardenaEntity, SwitchEntity):
 
     def __init__(self, coordinator, device_id: str, valve_id: int) -> None:
         super().__init__(coordinator, device_id, "schedule", valve_id)
-        self._attr_translation_key = None
-        self._attr_name = f"{self.valve_name} Zeitplan"
 
     @property
     def is_on(self) -> bool:
@@ -94,7 +92,7 @@ class GardenaScheduleSwitch(GardenaEntity, SwitchEntity):
     async def _write_pause(self, value: str) -> None:
         setting = self.device.pause_setting(self._valve_id)
         if setting is None:
-            raise ServiceValidationError("Dieses Gerät kennt keine Zeitplan-Pause")
+            raise ServiceValidationError("This device has no schedule pause setting")
         await self.coordinator.async_write(
             self.coordinator.client.async_put_setting(self._device_id, setting, value)
         )
@@ -124,7 +122,7 @@ class GardenaScheduleSwitch(GardenaEntity, SwitchEntity):
         for e in self.device.valve_events(self._valve_id):
             if e["id"] == event_id:
                 return e
-        raise ServiceValidationError(f"Zeitplan {event_id} gehört nicht zu {self.valve_name}")
+        raise ServiceValidationError(f"Schedule entry {event_id} does not belong to {self.valve_name}")
 
     async def async_update_schedule(self, event_id: str, start: str | None = None,
                                     end: str | None = None, weekdays: list[str] | None = None) -> None:
@@ -184,7 +182,7 @@ class GardenaWinterPause(GardenaEntity, SwitchEntity):
         await self._all("")
 
     async def async_add_schedule(self, **kwargs: Any) -> None:
-        raise ServiceValidationError("Zeitplan bitte am Schalter des Ventils anlegen")
+        raise ServiceValidationError("Use the schedule switch of a valve for this action")
 
     async_update_schedule = async_delete_schedule = async_add_schedule
 
@@ -209,6 +207,6 @@ class GardenaPowerSocket(GardenaEntity, SwitchEntity):
             self.coordinator.client.async_put_property(self._device_id, "power", "power_timer", "off"))
 
     async def async_pause(self, **kwargs: Any) -> None:
-        raise ServiceValidationError("Nur für Ventile")
+        raise ServiceValidationError("Only available for valves")
 
     async_resume = async_add_schedule = async_update_schedule = async_delete_schedule = async_pause

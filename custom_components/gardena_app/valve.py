@@ -31,8 +31,6 @@ class GardenaValve(GardenaEntity, ValveEntity):
 
     def __init__(self, coordinator, device_id: str, valve_id: int) -> None:
         super().__init__(coordinator, device_id, "valve", valve_id)
-        self._attr_translation_key = None
-        self._attr_name = self.valve_name
 
     @property
     def is_closed(self) -> bool:

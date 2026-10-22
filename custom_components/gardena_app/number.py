@@ -33,8 +33,6 @@ class GardenaDuration(GardenaEntity, RestoreNumber):
 
     def __init__(self, coordinator, device_id: str, valve_id: int) -> None:
         super().__init__(coordinator, device_id, "duration", valve_id)
-        self._attr_translation_key = None
-        self._attr_name = f"{self.valve_name} Dauer manuell"
         self._attr_native_value = DEFAULT_MINUTES
 
     async def async_added_to_hass(self) -> None:

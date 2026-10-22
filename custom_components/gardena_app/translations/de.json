@@ -67,6 +67,18 @@
       },
       "next_start": {
         "name": "Nächster Start"
+      },
+      "valve_next_start": {
+        "name": "{valve} nächster Start"
+      },
+      "paused_until": {
+        "name": "{valve} pausiert bis"
+      },
+      "valve_error": {
+        "name": "{valve} Fehler",
+        "state": {
+          "no_message": "kein Fehler"
+        }
       }
     },
     "binary_sensor": {
@@ -80,6 +92,9 @@
       },
       "power": {
         "name": "Steckdose"
+      },
+      "schedule": {
+        "name": "{valve} Zeitplan"
       }
     },
     "button": {
@@ -88,6 +103,16 @@
       },
       "measure": {
         "name": "Jetzt messen"
+      }
+    },
+    "number": {
+      "duration": {
+        "name": "{valve} Dauer manuell"
+      }
+    },
+    "valve": {
+      "valve": {
+        "name": "{valve}"
       }
     }
   },
