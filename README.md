@@ -15,6 +15,12 @@ valves and pause schedules for a few hours. This integration adds what the app c
 - GARDENA smart **Sensor** (soil moisture, soil/ambient temperature, light, battery, "measure now"),
   **Water Control** and **Power** socket are picked up automatically when present
 
+## Screenshot
+
+<img src="docs/images/device.png" alt="Irrigation Control device with schedule switches, winter pause and valves" width="360">
+
+*Device page (German UI): one valve and one schedule switch per valve, winter pause, next start and pause-until sensors.*
+
 ## Requirements
 
 A Husqvarna developer application (Application key + secret) with the
