@@ -75,4 +75,5 @@ Kompatibilität genannt. Die App-API ist undokumentiert und kann sich jederzeit 
 
 ## License
 
-MIT
+MIT – see [LICENSE](LICENSE). No third-party code is included and no Python packages are required
+(manifest `requirements: []`); the FHEM modules mentioned above were used as documentation only.
