@@ -24,6 +24,13 @@ valves and pause schedules for a few hours. This integration adds what the app c
 
 *Device page (German UI): one valve and one schedule switch per valve, winter pause, next start and pause-until sensors.*
 
+## Dashboard (Bubble style)
+
+A ready-made dark dashboard view in Bubble Card style (rounded cards, pop-up with details) is in [`dashboard/bubble.yaml`](dashboard/bubble.yaml). It needs [Bubble Card](https://github.com/Clooos/Bubble-Card) (HACS, v3.2 or newer). Add it via *Edit dashboard → ⋮ → Raw configuration editor* under `views:`; entity IDs are the English defaults – adjust them if yours differ.
+Rename `zone_1 … zone_3` to your valve names (one entity per valve/zone).
+
+<img src="docs/images/bubble_start.png" width="300" alt="Bubble dashboard"> <img src="docs/images/bubble_popup.png" width="300" alt="Bubble dashboard">
+
 ## Requirements
 
 A Husqvarna developer application (Application key + secret) with the

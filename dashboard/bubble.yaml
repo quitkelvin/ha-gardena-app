@@ -1,0 +1,124 @@
+# Bubble-style dashboard view (dark, rounded cards) – requires Bubble Card from HACS (Clooos/Bubble-Card, v3.2 or newer).
+# Add it as a view: Edit dashboard → ⋮ → Raw configuration editor → paste under `views:` (or copy the two cards into an existing view).
+# Tap the main card to open the pop-up (hash #garden). Entity IDs are the defaults for an English installation –
+# adjust them if your device or entities are named differently.
+title: Garden
+path: garden
+cards:
+- type: vertical-stack
+  cards:
+  - type: custom:bubble-card
+    card_type: separator
+    name: Garden
+    icon: mdi:sprinkler-variant
+  - type: custom:bubble-card
+    card_type: button
+    button_type: state
+    entity: sensor.irrigation_control_next_start
+    name: Next watering
+    show_state: true
+    icon: mdi:sprinkler-variant
+    sub_button:
+    - entity: switch.irrigation_control_winter_pause_all_schedules
+      show_state: true
+      show_icon: true
+      name: Winter pause
+      show_name: false
+    tap_action:
+      action: navigate
+      navigation_path: '#garden'
+- type: custom:bubble-card
+  card_type: pop-up
+  hash: '#garden'
+  popup_style: home-assistant
+  name: Garden
+  icon: mdi:sprinkler-variant
+  cards:
+  - type: custom:bubble-card
+    card_type: separator
+    name: Valves
+    icon: mdi:pipe-valve
+  - type: custom:bubble-card
+    card_type: button
+    button_type: switch
+    entity: valve.irrigation_control_zone_1
+    name: Zone 1
+    show_state: true
+    icon: mdi:water
+    sub_button:
+    - entity: number.irrigation_control_zone_1_manual_duration
+      show_state: true
+      show_icon: true
+    tap_action:
+      action: toggle
+  - type: custom:bubble-card
+    card_type: button
+    button_type: switch
+    entity: valve.irrigation_control_zone_2
+    name: Zone 2
+    show_state: true
+    icon: mdi:water
+    sub_button:
+    - entity: number.irrigation_control_zone_2_manual_duration
+      show_state: true
+      show_icon: true
+    tap_action:
+      action: toggle
+  - type: custom:bubble-card
+    card_type: button
+    button_type: switch
+    entity: valve.irrigation_control_zone_3
+    name: Zone 3
+    show_state: true
+    icon: mdi:water
+    sub_button:
+    - entity: number.irrigation_control_zone_3_manual_duration
+      show_state: true
+      show_icon: true
+    tap_action:
+      action: toggle
+  - type: custom:bubble-card
+    card_type: separator
+    name: Schedules
+    icon: mdi:calendar-clock
+  - type: grid
+    columns: 2
+    square: false
+    cards:
+    - type: custom:bubble-card
+      card_type: button
+      button_type: switch
+      entity: switch.irrigation_control_zone_1_schedule
+      name: Zone 1
+      show_state: true
+      icon: mdi:calendar-check
+    - type: custom:bubble-card
+      card_type: button
+      button_type: switch
+      entity: switch.irrigation_control_zone_2_schedule
+      name: Zone 2
+      show_state: true
+      icon: mdi:calendar-check
+    - type: custom:bubble-card
+      card_type: button
+      button_type: switch
+      entity: switch.irrigation_control_zone_3_schedule
+      name: Zone 3
+      show_state: true
+      icon: mdi:calendar-check
+    - type: custom:bubble-card
+      card_type: button
+      button_type: switch
+      entity: switch.irrigation_control_winter_pause_all_schedules
+      name: Winter pause
+      show_state: true
+      icon: mdi:snowflake
+  - type: custom:bubble-card
+    card_type: button
+    button_type: name
+    entity: button.irrigation_control_close_all_valves
+    name: Close all valves
+    show_state: false
+    icon: mdi:close-circle
+    tap_action:
+      action: toggle
