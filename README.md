@@ -1,4 +1,7 @@
-# Gardena App (schedules & control) for Home Assistant
+# Schedules & control for GARDENA smart – Home Assistant (unofficial)
+
+> **Independent hobby project** – not affiliated with, endorsed or supported by GARDENA or Husqvarna Group.
+> "GARDENA" is used only to describe compatibility; see [Disclaimer](#disclaimer).
 
 Custom integration that talks to the **same cloud API the GARDENA smart app uses**
 (`smart.gardena.com/v1`). The official GARDENA smart system API can only open/close
@@ -31,7 +34,7 @@ its key and secret are offered automatically. No app password is stored.
 ## Installation
 
 HACS → Custom repositories → `https://github.com/quitkelvin/ha-gardena-app` (Integration),
-install, restart Home Assistant, then *Settings → Devices & services → Add integration → Gardena App*.
+install, restart Home Assistant, then *Settings → Devices & services → Add integration → Schedules & control for GARDENA smart (unofficial)*.
 
 Polling interval defaults to 10 minutes (options). Writes refresh immediately.
 
@@ -59,12 +62,16 @@ data:
 
 This project is **not affiliated with, endorsed or supported by GARDENA, Husqvarna Group**
 or any of their subsidiaries. "GARDENA" is a trademark of its owner and is used only to
-describe compatibility. The app API used here is undocumented and may change or stop
+describe compatibility; no logos are used and no official status is implied. The app API used here is undocumented and may change or stop
 working at any time. Use at your own risk – a wrong schedule can water at the wrong time
 or not at all. Keep an eye on your garden after changes.
 
 Thanks to the FHEM GardenaSmartBridge/GardenaSmartDevice modules, whose public
 documentation of the app API made this possible (no code was copied).
+
+**Kurzfassung (DE):** Unabhängiges Hobbyprojekt – **keine** Verbindung zu GARDENA oder der Husqvarna Group,
+nicht von ihnen unterstützt oder geprüft. „GARDENA“ ist eine Marke ihres Inhabers und wird nur zur Angabe der
+Kompatibilität genannt. Die App-API ist undokumentiert und kann sich jederzeit ändern. Nutzung auf eigene Gefahr.
 
 ## License
 

@@ -1,6 +1,6 @@
 {
   "domain": "gardena_app",
-  "name": "Gardena App (schedules & control)",
+  "name": "Schedules & control for GARDENA smart (unofficial)",
   "codeowners": [
     "@quitkelvin"
   ],
@@ -14,5 +14,5 @@
     "custom_components.gardena_app"
   ],
   "requirements": [],
-  "version": "0.1.0"
+  "version": "0.1.1"
 }

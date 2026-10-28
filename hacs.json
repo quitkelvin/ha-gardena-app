@@ -1,5 +1,5 @@
 {
-  "name": "Gardena App (schedules & control)",
+  "name": "Schedules & control for GARDENA smart (unofficial)",
   "homeassistant": "2024.11.0",
   "render_readme": true
 }
