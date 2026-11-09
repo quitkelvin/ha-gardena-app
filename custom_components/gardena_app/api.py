@@ -7,6 +7,7 @@ Unlike the official API this one exposes the app's schedules and settings.
 
 from __future__ import annotations
 
+import re
 import time
 from typing import Any
 
@@ -21,6 +22,35 @@ class GardenaError(Exception):
 
 class GardenaAuthError(GardenaError):
     """Client key or secret were rejected."""
+
+
+_CODE_OK = re.compile(r"[^a-z0-9_.-]")
+
+
+async def _error_code(resp: aiohttp.ClientResponse) -> str:
+    """Short, sanitised error code from a failed response; never the raw body.
+
+    Error bodies can echo account, location or device data, so only a code like
+    ``invalid_client`` (lower case, at most 40 characters of [a-z0-9_.-]) is kept.
+    """
+    try:
+        body = await resp.json(content_type=None)
+    except (aiohttp.ClientError, ValueError):
+        return "unknown"
+    code: Any = None
+    if isinstance(body, dict):
+        code = body.get("error") or body.get("code")
+        errors = body.get("errors")
+        if not code and isinstance(errors, list) and errors and isinstance(errors[0], dict):
+            code = errors[0].get("code")
+    if not isinstance(code, (str, int)):
+        return "unknown"
+    return _CODE_OK.sub("_", str(code).strip().lower())[:40] or "unknown"
+
+
+def _route(path: str) -> str:
+    """Endpoint name without ids or query string (``/devices/<id>/...`` -> ``/devices``)."""
+    return "/" + path.lstrip("/").split("?", 1)[0].split("/", 1)[0]
 
 
 class GardenaAppClient:
@@ -46,14 +76,15 @@ class GardenaAppClient:
         try:
             async with self._session.post(AUTH_URL, data=data, timeout=aiohttp.ClientTimeout(total=20)) as resp:
                 if resp.status >= 400:
-                    text = await resp.text()
+                    code = await _error_code(resp)
                     # Only a rejected key/secret is fatal; anything else (rate limit, hiccup) is retried.
-                    if resp.status in (401, 403) or "invalid_client" in text:
-                        raise GardenaAuthError(f"token request rejected ({resp.status})")
-                    raise GardenaError(f"token request failed ({resp.status}): {text[:120]}")
+                    if resp.status in (401, 403) or code == "invalid_client":
+                        raise GardenaAuthError(f"token request rejected (HTTP {resp.status}, {code})")
+                    raise GardenaError(f"token request failed (HTTP {resp.status}, {code})")
                 body = await resp.json()
         except aiohttp.ClientError as err:
-            raise GardenaError(f"token request failed: {err}") from err
+            # The exception text can contain the request URL; keep only its type.
+            raise GardenaError(f"token request failed ({type(err).__name__})") from None
         self._token = body["access_token"]
         self._token_until = time.monotonic() + int(body.get("expires_in", 3600)) - 120
         self.user_id = body.get("user_id")
@@ -76,13 +107,14 @@ class GardenaAppClient:
                     self._token = None
                     return await self._request(method, path, payload, retry=False)
                 if resp.status >= 400:
-                    raise GardenaError(f"{method} {path}: {resp.status} {(await resp.text())[:200]}")
+                    raise GardenaError(f"{method} {_route(path)} failed (HTTP {resp.status}, {await _error_code(resp)})")
                 if resp.status == 204:
                     return None
                 text = await resp.text()
                 return None if not text else await resp.json(content_type=None)
         except aiohttp.ClientError as err:
-            raise GardenaError(f"{method} {path} failed: {err}") from err
+            # The exception text can contain the URL with account/device ids; keep only its type.
+            raise GardenaError(f"{method} {_route(path)} failed ({type(err).__name__})") from None
 
     async def async_locate(self) -> str:
         """Find the first location of the account."""
